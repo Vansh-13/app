@@ -4,8 +4,8 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const path = require('path');
 const cookieParser = require('cookie-parser');
-const User = require('./models/user');
-const Post = require('./models/post');
+const User = require('./user');
+const Post = require('./post');
 
 require('dotenv').config(); // Load environment variables
 
@@ -23,11 +23,11 @@ mongoose.connect(process.env.MONGO_URI, {
 
 // Middleware
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, ''));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+
 
 // Routes
 app.get("/", (req, res) => res.render("index"));
