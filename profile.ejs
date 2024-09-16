@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Creation</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 flex items-center justify-center min-h-screen p-4">
+    <div class="w-full max-w-4xl bg-gray-800 p-6 rounded-lg shadow-lg relative">
+        <!-- Logout Button -->
+        <a href="/logout" class="absolute top-2 right-2 bg-red-500 text-white rounded-md py-1 px-3 text-center hover:bg-red-600 transition-colors duration-200 text-sm">
+            Logout
+        </a>
+        
+        <!-- Main Content -->
+        <div class="space-y-6">
+            <div class="text-center">
+                <h1 class="text-2xl font-bold text-white mb-2">Hello, <%= user.username %> 👋</h1>
+                <h5 class="text-lg font-semibold text-white mb-6">Create a new post.</h5>
+            </div>
+            <form action="/post" method="post" class="space-y-4">
+                <textarea placeholder="What's on your mind?" 
+                          class="p-3 w-full resize-none bg-gray-700 border-2 border-gray-600 rounded-md text-white"
+                          rows="3" name="content"></textarea>
+                <input type="submit" 
+                       class="px-4 py-2 w-full text-sm bg-blue-500 text-white rounded-md cursor-pointer hover:bg-blue-600 transition-colors duration-200"
+                       value="Create Post">
+            </form>
+            
+            <!-- Posts Section -->
+            <div>
+                <h3 class="text-xl text-orange-400 mb-4 text-center">Your Posts</h3>
+                <div class="space-y-4">
+                    <% if (user.posts && user.posts.length > 0) { %>
+                        <% user.posts.reverse().forEach(function(post) { %>
+                            <div class="w-full p-4 border border-zinc-900 bg-gray-700 rounded-md">
+                                <h4 class="text-lg font-semibold text-blue-400 mb-2">@<%= user.username %></h4>
+                                <p class="text-white text-sm mb-3"><%= post.content %></p>
+                                <div class="flex justify-start gap-4">
+                                    <a href="/Like/<%= post._id %>" class="text-blue-500 hover:underline">Like</a>
+                                    <a href="#" class="text-zinc-600 hover:underline">Edit</a>
+                                </div>
+                            </div>
+                        <% }) %>
+                    <% } else { %>
+                        <p class="text-white text-center">You have no posts yet.</p>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
