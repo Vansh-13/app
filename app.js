@@ -4,15 +4,15 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const path = require('path');
 const cookieParser = require('cookie-parser');
-const userModel = require('./modela/user');
-const postModel = require('./modela/post');
+const userModel = require('./user');
+const postModel = require('./post');
 
 app.set('view engine', "ejs");
-app.set("views", path.join(__dirname, "views"));
+app.set("views", path.join(__dirname, ""));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
+
 
 app.get("/", (req, res) => {
     res.render("index");
