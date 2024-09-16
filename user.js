@@ -1,18 +1,16 @@
-const mongoose=require('mongoose');
-mongoose.connect('mongodb+srv://madaanvansh:H@rsh13lpu@cluster0.fagey.mongodb.net/');
+const mongoose = require('mongoose');
 
-const userScahma=mongoose.Schema({
-          username:String,
-          name:String,
-          age:Number,
-          email:String,
-          password:String,
-          posts:[
-            {
-                type:mongoose.Schema.Types.ObjectId,
-                ref:'post'
-            }
-          ]
-})
+// Define user schema
+const userSchema = new mongoose.Schema({
+  username: String,
+  name: String,
+  age: Number,
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+  posts: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Post'
+  }]
+});
 
-module.exports=mongoose.model("user",userScahma);
+module.exports = mongoose.model('User', userSchema);
